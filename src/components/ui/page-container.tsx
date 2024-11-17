@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react";
 import Loader from "./loader";
+import { cn } from "@/lib/utils";
 
 type PageProps = {
   data?: unknown;
@@ -30,10 +31,16 @@ export function PageContainer({ data, isLoading, children }: PageProps) {
 
 type PageHeaderProps = {
   children: ReactNode;
+  className?: string;
 };
-export function PageHeader({ children }: PageHeaderProps) {
+export function PageHeader({ children, className }: PageHeaderProps) {
   return (
-    <div className="text-left font-semibold text-lg flex flex-col items-center">
+    <div
+      className={cn(
+        "text-left font-semibold text-lg flex flex-col items-center",
+        className
+      )}
+    >
       {children}
     </div>
   );

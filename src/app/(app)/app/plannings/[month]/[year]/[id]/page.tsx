@@ -1,6 +1,4 @@
 "use client";
-
-import { DataTable } from "@/components/ui/data-table";
 import {
   PageContainer,
   PageContent,
@@ -11,12 +9,11 @@ import { getMonthName } from "@/utils/date";
 import { useQuery } from "@tanstack/react-query";
 import { capitalize } from "lodash";
 import { useParams } from "next/navigation";
-import { fixedExpenseColumns } from "./fixed_expenses_columns";
-import { variableExpenseColumns } from "./variable_expenses_columns";
-import { Button } from "@/components/ui/button";
 import useTableData from "@/hooks/use-table-data";
-import { receiptsColumns } from "./receipts_columns";
 import { useEffect } from "react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import SpreadsheetTab from "./spreadsheet_tab";
+import ChartTab from "./chart_tab";
 
 export type PlanningDetailsUrlParams = {
   month: string;
@@ -31,7 +28,7 @@ export default function PlanningDetailsPage() {
     queryFn: async () => PlanningRequests.show(Number(id)),
   });
 
-  const { queries, mutations } = useTableData({
+  const { queries } = useTableData({
     planningId: Number(id),
   });
 
@@ -55,61 +52,29 @@ export default function PlanningDetailsPage() {
       isLoading={isLoading}
       data={data}
     >
-      <PageHeader>
+      <PageHeader className="flex items-center justify-between">
         Planejamento de {capitalize(getMonthName(data?.month || 1))} -{" "}
         {data?.year}
       </PageHeader>
       <PageContent>
-        <div className="flex flex-col gap-4 w-full px-2">
-          <div className="flex flex-col gap-2">
-            <span>Despesas Fixas</span>
-            <DataTable columns={fixedExpenseColumns} data={fixedExpenses} />
-            <Button
-              variant={"outline"}
-              onClick={() =>
-                mutations.createFixedExpenseMutation.mutateAsync({
-                  planning_id: Number(id),
-                })
-              }
-            >
-              Adicionar nova
-            </Button>
+        <Tabs defaultValue="spreadsheet" className="w-full">
+          <div className="flex flex-col items-end">
+            <span>Modo de visualização</span>
+            <TabsList className="w-full justify-end">
+              <TabsTrigger className="" value="spreadsheet">
+                Tabela
+              </TabsTrigger>
+              <TabsTrigger value="password">Gráfico</TabsTrigger>
+            </TabsList>
           </div>
-          <hr />
-          <div className="grid grid-cols-2 gap-5">
-            <div className="flex flex-col gap-2 h-full min-h-full">
-              <span>Despesas variáveis</span>
-              <DataTable
-                columns={variableExpenseColumns}
-                data={variableExpenses}
-              />
-              <Button
-                variant={"outline"}
-                onClick={() =>
-                  mutations.createVariableExpenseMutation.mutateAsync({
-                    planning_id: Number(id),
-                  })
-                }
-              >
-                Adicionar nova
-              </Button>
-            </div>
-            <div className="flex flex-col gap-2 h-full min-h-full">
-              <span>Recebimentos</span>
-              <DataTable columns={receiptsColumns} data={receipts} />
-              <Button
-                variant={"outline"}
-                onClick={() =>
-                  mutations.createReceiptMutation.mutateAsync({
-                    planning_id: Number(id),
-                  })
-                }
-              >
-                Adicionar nova
-              </Button>
-            </div>
-          </div>
-        </div>
+          <SpreadsheetTab
+            fixedExpenses={fixedExpenses}
+            variableExpenses={variableExpenses}
+            receipts={receipts}
+            planning_id={Number(id)}
+          />
+          <ChartTab />
+        </Tabs>
       </PageContent>
     </PageContainer>
   );

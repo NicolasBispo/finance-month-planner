@@ -66,7 +66,7 @@ export const receiptsColumns: ColumnDef<Receipt>[] = [
           entityName="receipt"
           updateKey="receipt_type"
           recordId={row.original.id}
-          initialValue={row.original.receipt_type}
+          initialValue={row.original.receipt_type || ""}
           updateElementByIdRequest={updateElementByIdRequest}
           refetchCallback={refetchFunction(row.original.planning_id)}
         />
