@@ -11,7 +11,7 @@ export default function TableCellContainer({
 }: TableCellContainerProps) {
   return (
     <div
-      className={cn("relative w-24 h-12 flex max-h-12 min-h-12 max-w-24", className)}
+      className={cn("relative w-full h-12 flex max-h-12 min-h-12 justify-center px-2 py-1", className)}
     >
       {children}
     </div>

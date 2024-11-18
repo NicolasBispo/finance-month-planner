@@ -35,7 +35,7 @@ export const receiptsColumns: ColumnDef<Receipt>[] = [
       });
       return (
         <TableDeleteCell
-          deleteMutation={mutations.deleteVariableExpenseMutation}
+          deleteMutation={mutations.deleteReceiptMutation}
           recordId={row.original.id}
         />
       );

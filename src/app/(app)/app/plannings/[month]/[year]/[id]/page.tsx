@@ -64,7 +64,7 @@ export default function PlanningDetailsPage() {
               <TabsTrigger className="" value="spreadsheet">
                 Tabela
               </TabsTrigger>
-              <TabsTrigger value="password">Gráfico</TabsTrigger>
+              <TabsTrigger value="chart">Gráfico</TabsTrigger>
             </TabsList>
           </div>
           <SpreadsheetTab

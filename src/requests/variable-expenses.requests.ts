@@ -30,7 +30,9 @@ async function update(
     method: "PUT",
     url: endpoints.update(variable_expense_id),
     data: {
-      ...payload_data,
+      variable_expense: {
+        ...payload_data,
+      },
     },
   });
   return data;
@@ -41,11 +43,13 @@ async function create(planning_id: number) {
     method: "POST",
     url: endpoints.create(planning_id),
     data: {
-      expense_name: "",
-      purchase_date: new Date(),
-      value: 0,
-      observations: "",
-      planning_id,
+      variable_expense: {
+        expense_name: "",
+        purchase_date: new Date(),
+        value: 0,
+        observations: "",
+        planning_id,
+      },
     },
   });
   return data;

@@ -96,7 +96,7 @@ export const variableExpenseColumns: ColumnDef<VariableExpense>[] = [
       return (
         <TableTextareaCell
           entityName="variable_expense"
-          updateKey="due_date"
+          updateKey="observations"
           recordId={row.original.id}
           initialValue={row.original.observations}
           updateElementByIdRequest={updateElementByIdRequest}

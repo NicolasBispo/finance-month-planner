@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import useTableData from "@/hooks/use-table-data";
 import { variableExpenseColumns } from "./variable_expenses_columns";
 import { receiptsColumns } from "./receipts_columns";
+import { FinanceResult, financeResultColumns } from "./finance_result_columns";
 type SpreadsheetTabProps = {
   planning_id: number;
   fixedExpenses: FixedExpense[];
@@ -22,8 +23,17 @@ export default function SpreadsheetTab({
   variableExpenses,
   receipts,
 }: SpreadsheetTabProps) {
-  const {mutations} = useTableData({ planningId: planning_id });
-
+  const {
+    mutations,
+    queries: { fixedExpensesQuery, receiptsQuery, variableExpensesQuery },
+  } = useTableData({ planningId: planning_id });
+  const financeResult: FinanceResult[] = [
+    {
+      fixed_expenses: fixedExpensesQuery.data || [],
+      receipts: receiptsQuery.data || [],
+      variable_expenses: variableExpensesQuery.data || [],
+    },
+  ];
   return (
     <TabsContent value="spreadsheet">
       <div className="flex flex-col gap-4 w-full px-2">
@@ -74,6 +84,10 @@ export default function SpreadsheetTab({
               Adicionar nova
             </Button>
           </div>
+        </div>
+        <div className="w-full flex flex-col gap-2">
+          <span className="w-full">Totais</span>
+          <DataTable columns={financeResultColumns} data={financeResult} />
         </div>
       </div>
     </TabsContent>

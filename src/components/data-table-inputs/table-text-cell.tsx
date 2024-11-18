@@ -57,7 +57,7 @@ export function TableTextCell({
   return (
     <TableCellContainer>
       <Input
-        className={cn("w-full h-full", {
+        className={cn("w-full", {
           "absolute top-0 left-0 w-64  z-10 flex": focused,
         })}
         type={type}

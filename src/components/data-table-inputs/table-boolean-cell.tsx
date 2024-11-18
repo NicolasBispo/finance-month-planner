@@ -57,7 +57,7 @@ export default function TableBooleanCell({
           onChangeSelect(Boolean(value));
         }}
       >
-        <SelectTrigger className="w-full h-full bg-background">
+        <SelectTrigger className="w-full max-h-full h-full bg-background">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>

@@ -32,14 +32,17 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="rounded-md border h-full">
+    <div className="rounded-md border">
       <Table>
-        <TableHeader className="items-center">
+        <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id} className="flex justify-start items-center gap-2 w-full">
+            <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id} className="min-w-24 max-w-24 flex justify-center text-left shrink-0 items-center p-0">
+                  <TableHead
+                    key={header.id}
+                    className="border-r last:border-r-0"
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -57,11 +60,11 @@ export function DataTable<TData, TValue>({
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
-                className="flex justify-start gap-2 items-center py-2"
+                className="items-center"
                 data-state={row.getIsSelected() && "selected"}
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className="min-w-24 max-w-24 flex items-center justify-center p-0 h-12 ">
+                  <TableCell className="border-r last:border-r-0" key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
@@ -70,7 +73,7 @@ export function DataTable<TData, TValue>({
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                Sem resultados
+                Sem resultados.
               </TableCell>
             </TableRow>
           )}

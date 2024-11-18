@@ -8,14 +8,17 @@ import { useDebounce } from "@uidotdev/usehooks";
 import { useMutation } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
 
-type TableFinanceCellProps = {} & BaseTableCellProps;
+type TableFinanceCellProps = {
+  disabled?: boolean;
+} & BaseTableCellProps;
 export default function TableFinanceCell({
   initialValue,
+  disabled = false,
   entityName,
   recordId,
   updateElementByIdRequest,
   refetchCallback,
-  updateKey
+  updateKey,
 }: TableFinanceCellProps) {
   const [currentValue, setCurrentValue] = useState(initialValue);
   const [focused, setFocused] = useState(false);
@@ -28,7 +31,7 @@ export default function TableFinanceCell({
       return await updateElementByIdRequest(recordId, updateKey, updateValue);
     },
     onSuccess: async () => {
-      await refetchCallback()
+      await refetchCallback();
     },
   });
 
@@ -60,6 +63,7 @@ export default function TableFinanceCell({
             <span className="text-muted-foreground">R$</span>
           </div>
           <Input
+            disabled={disabled}
             id="currency"
             type="number"
             min={0}

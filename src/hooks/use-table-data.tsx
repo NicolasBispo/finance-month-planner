@@ -66,7 +66,7 @@ export default function useTableData({ planningId }: UseTableDataProps) {
       return await ReceiptRequests.create(planning_id);
     },
     onSuccess: async () => {
-      await fixedExpensesQuery.refetch();
+      await receiptsQuery.refetch();
     },
   });
 

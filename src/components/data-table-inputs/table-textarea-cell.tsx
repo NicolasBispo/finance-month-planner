@@ -54,7 +54,7 @@ export default function TableTextareaCell({
     <TableCellContainer>
       <Textarea
         className={cn("w-full p-3 min-h-full bg-background max-h-full", {
-          "absolute top-0 left-0 w-64 h-44 z-40 flex": focused,
+          "absolute top-0 left-0 w-64 z-[99]": focused,
         })}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
