@@ -22,11 +22,10 @@ export function TableTextCell({
   updateElementByIdRequest,
   type = "text",
   disabled = false,
-  refetchCallback
+  refetchCallback,
 }: TableTextInputProps) {
   const [currentValue, setCurrentValue] = useState(initialValue);
-  const [focused, setFocused] = useState(false);
-  const debouncedValue = useDebounce(currentValue, 500);
+  const debouncedValue = useDebounce(currentValue, 2000);
   const hasMounted = useRef(false); // Ref para verificar se o componente já montou
 
   const updateMutation = useMutation({
@@ -35,7 +34,7 @@ export function TableTextCell({
       return await updateElementByIdRequest(recordId, updateKey, updateValue);
     },
     onSuccess: async () => {
-      await refetchCallback()
+      await refetchCallback();
     },
   });
 
@@ -57,12 +56,8 @@ export function TableTextCell({
   return (
     <TableCellContainer>
       <Input
-        className={cn("w-full", {
-          "absolute top-0 left-0 w-64  z-10 flex": focused,
-        })}
+        className={cn("w-full")}
         type={type}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
         value={String(currentValue)}
         disabled={disabled}
         onChange={(e) => setCurrentValue(e.target.value)}

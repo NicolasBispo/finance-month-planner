@@ -19,7 +19,7 @@ export default function TableDeleteCell({
   recordId,
 }: TableDeleteCellProps) {
   return (
-    <TableCellContainer className="w-fit flex items-center">
+    <TableCellContainer className="w-fit flex items-center max-w-fit">
       <Button
         variant={"destructive"}
         className="size-7"

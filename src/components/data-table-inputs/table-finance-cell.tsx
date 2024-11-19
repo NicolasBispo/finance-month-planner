@@ -22,7 +22,7 @@ export default function TableFinanceCell({
 }: TableFinanceCellProps) {
   const [currentValue, setCurrentValue] = useState(initialValue);
   const [focused, setFocused] = useState(false);
-  const debouncedValue = useDebounce(currentValue, 500);
+  const debouncedValue = useDebounce(currentValue, 2000);
   const hasMounted = useRef(false);
 
   const updateMutation = useMutation({
@@ -74,9 +74,7 @@ export default function TableFinanceCell({
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             onChange={(e) => setCurrentValue(e.target.value)}
-            className={cn("pl-9 h-full", {
-              "absolute top-0 left-0 w-64  z-10 flex": focused,
-            })}
+            className={cn("pl-9 h-full")}
           />
         </div>
       </div>

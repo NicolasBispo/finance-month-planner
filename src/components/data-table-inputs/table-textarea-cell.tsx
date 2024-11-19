@@ -21,8 +21,7 @@ export default function TableTextareaCell({
   refetchCallback,
 }: TableTextareaCellProps) {
   const [currentValue, setCurrentValue] = useState(initialValue);
-  const [focused, setFocused] = useState(false);
-  const debouncedValue = useDebounce(currentValue, 500);
+  const debouncedValue = useDebounce(currentValue, 2000);
   const hasMounted = useRef(false); // Ref para verificar se o componente já montou
 
   const updateMutation = useMutation({
@@ -53,11 +52,7 @@ export default function TableTextareaCell({
   return (
     <TableCellContainer>
       <Textarea
-        className={cn("w-full p-3 min-h-full bg-background max-h-full", {
-          "absolute top-0 left-0 w-64 z-[99]": focused,
-        })}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
+        className={cn("w-full p-3 min-h-full bg-background")}
         value={String(currentValue)}
         onChange={(e) => setCurrentValue(e.target.value)}
       />

@@ -27,7 +27,7 @@ function refetchFunction(planningId: number) {
 }
 export const receiptsColumns: ColumnDef<Receipt>[] = [
   {
-    id: "actions",
+    id: "action_cell",
     header: "Ação",
     cell: ({ row }) => {
       const { mutations } = useTableData({

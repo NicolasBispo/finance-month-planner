@@ -27,7 +27,7 @@ function refetchFunction(planningId: number) {
 }
 export const variableExpenseColumns: ColumnDef<VariableExpense>[] = [
   {
-    id: "actions",
+    id: "action_cell",
     header: "Ação",
     cell: ({ row }) => {
       const { mutations } = useTableData({

@@ -99,8 +99,10 @@ export const financeResultColumns: ColumnDef<FinanceResult>[] = [
         .map((variable_expense) => variable_expense.value)
         .reduce((prev, next) => (prev += next), 0);
 
-      const totalValues =
-        totalReceipts + totalFixedExpenses + totalVariableExpenses;
+      const totalValues = (
+        totalReceipts -
+        (totalFixedExpenses + totalVariableExpenses)
+      ).toFixed(2);
       return (
         <TableFinanceCell
           disabled

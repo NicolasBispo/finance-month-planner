@@ -29,7 +29,7 @@ function refetchFunction(planningId: number) {
 
 export const fixedExpenseColumns: ColumnDef<FixedExpense>[] = [
   {
-    id: "actions",
+    id: "action_cell",
     header: "Ação",
     cell: ({ row }) => {
       const { mutations } = useTableData({

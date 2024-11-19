@@ -52,38 +52,34 @@ export default function SpreadsheetTab({
           </Button>
         </div>
         <hr />
-        <div className="grid grid-cols-2 gap-5">
-          <div className="flex flex-col gap-2 h-full min-h-full">
-            <span>Despesas variáveis</span>
-            <DataTable
-              columns={variableExpenseColumns}
-              data={variableExpenses}
-            />
-            <Button
-              variant={"outline"}
-              onClick={() =>
-                mutations.createVariableExpenseMutation.mutateAsync({
-                  planning_id,
-                })
-              }
-            >
-              Adicionar nova
-            </Button>
-          </div>
-          <div className="flex flex-col gap-2 h-full min-h-full">
-            <span>Recebimentos</span>
-            <DataTable columns={receiptsColumns} data={receipts} />
-            <Button
-              variant={"outline"}
-              onClick={() =>
-                mutations.createReceiptMutation.mutateAsync({
-                  planning_id,
-                })
-              }
-            >
-              Adicionar nova
-            </Button>
-          </div>
+
+        <div className="flex flex-col gap-2 h-full min-h-full">
+          <span>Despesas variáveis</span>
+          <DataTable columns={variableExpenseColumns} data={variableExpenses} />
+          <Button
+            variant={"outline"}
+            onClick={() =>
+              mutations.createVariableExpenseMutation.mutateAsync({
+                planning_id,
+              })
+            }
+          >
+            Adicionar nova
+          </Button>
+        </div>
+        <div className="flex flex-col gap-2 h-full min-h-full">
+          <span>Recebimentos</span>
+          <DataTable columns={receiptsColumns} data={receipts} />
+          <Button
+            variant={"outline"}
+            onClick={() =>
+              mutations.createReceiptMutation.mutateAsync({
+                planning_id,
+              })
+            }
+          >
+            Adicionar nova
+          </Button>
         </div>
         <div className="w-full flex flex-col gap-2">
           <span className="w-full">Totais</span>
