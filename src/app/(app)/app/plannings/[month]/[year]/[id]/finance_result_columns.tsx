@@ -1,5 +1,8 @@
+"use client";
+
 /* eslint-disable react-hooks/rules-of-hooks */
 import TableFinanceCell from "@/components/data-table-inputs/table-finance-cell";
+import useFinanceCalc from "@/hooks/use-finance-calc";
 import FixedExpense from "@/types/entities/fixed_expense.entity";
 import Receipt from "@/types/entities/receipt.entity";
 import VariableExpense from "@/types/entities/variable_expense.entity";
@@ -87,22 +90,13 @@ export const financeResultColumns: ColumnDef<FinanceResult>[] = [
     cell: ({ row }) => {
       const { variable_expenses, fixed_expenses, receipts } = row.original;
 
-      const totalReceipts = receipts
-        .map((receipt) => receipt.value)
-        .reduce((prev, next) => (prev += next), 0);
+      const { calculateDebts } = useFinanceCalc({
+        variable_expenses,
+        fixed_expenses,
+        receipts,
+      });
 
-      const totalFixedExpenses = fixed_expenses
-        .map((receipt) => receipt.value)
-        .reduce((prev, next) => (prev += next), 0);
-
-      const totalVariableExpenses = variable_expenses
-        .map((variable_expense) => variable_expense.value)
-        .reduce((prev, next) => (prev += next), 0);
-
-      const totalValues = (
-        totalReceipts -
-        (totalFixedExpenses + totalVariableExpenses)
-      ).toFixed(2);
+      const totalValues = calculateDebts().toFixed(2);
       return (
         <TableFinanceCell
           disabled

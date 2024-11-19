@@ -1,3 +1,5 @@
+"use client"
+
 /* eslint-disable react-hooks/rules-of-hooks */
 import TableBooleanCell from "@/components/data-table-inputs/table-boolean-cell";
 import { TableDateCell } from "@/components/data-table-inputs/table-date-cell";

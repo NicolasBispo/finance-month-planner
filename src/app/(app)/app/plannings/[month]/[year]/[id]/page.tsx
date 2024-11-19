@@ -26,6 +26,7 @@ export default function PlanningDetailsPage() {
   const { data, isLoading, isRefetching } = useQuery({
     queryKey: ["planning", id],
     queryFn: async () => PlanningRequests.show(Number(id)),
+    refetchOnWindowFocus: false
   });
 
   const { queries } = useTableData({
@@ -57,7 +58,7 @@ export default function PlanningDetailsPage() {
         {data?.year}
       </PageHeader>
       <PageContent>
-        <Tabs defaultValue="spreadsheet" className="w-full">
+        <Tabs defaultValue="chart" className="w-full">
           <div className="flex flex-col items-end">
             <span>Modo de visualização</span>
             <TabsList className="w-full justify-end">
@@ -73,7 +74,11 @@ export default function PlanningDetailsPage() {
             receipts={receipts}
             planning_id={Number(id)}
           />
-          <ChartTab />
+          <ChartTab
+            fixed_expenses={fixedExpenses}
+            variable_expenses={variableExpenses}
+            receipts={receipts}
+          />
         </Tabs>
       </PageContent>
     </PageContainer>

@@ -1,3 +1,4 @@
+"use client"
 /* eslint-disable react-hooks/rules-of-hooks */
 import { TableDateCell } from "@/components/data-table-inputs/table-date-cell";
 import TableDeleteCell from "@/components/data-table-inputs/table-delete-cell";
